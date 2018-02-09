@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     char buffer[BUFFER_LEN] = { 0 };
     char command[BUFFER_LEN] = { 0 };
     char arg[BUFFER_LEN] = { 0 };
+    char *token;
 
     // Parse the commands provided using argc and argv
 
@@ -34,6 +35,8 @@ int main(int argc, char *argv[])
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
         // Perform string tokenization to get the command and argument
+        token = strtok(buffer, "\n");
+        strcpy(command, token);
 
         // Check the command and execute the operations for each command
         // cd command -- change the current directory
@@ -43,7 +46,11 @@ int main(int argc, char *argv[])
         }
 
         // other commands here...
-        
+        if (strcmp(command, "help") == 0)
+        {
+            printf("supported commands\n");
+            printf("quit - exit the shell\n");
+        }
         // quit command -- exit the shell
         else if (strcmp(command, "quit") == 0)
         {
