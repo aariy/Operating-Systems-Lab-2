@@ -1,17 +1,17 @@
 CC = clang
-CFLAGS = -Wall -Wextra -std=c99
-LFLAGS = 
+CFLAGS = -Wall -Wextra -std=c99 -g
+LFLAGS =
 LIBS = -lm
 SOURCES = myshell.c utility.c
 OBJECTS = $(subst .c,.o,$(SOURCES))
 BIN = myshell
 .PHONY: clean help
 
-% : %.o
-	$(CC) $(CFLAGS) $< $(LIBS) -o $@ 
+myshell: $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) -o $@
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< 
+	$(CC) $(CFLAGS) -c $<
 
 all : $(BIN)
 
